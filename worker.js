@@ -1,33 +1,21 @@
-// Cloudflare Worker - esggo-learning-center 靜態網站代理
-// 部署至: https://esggo-learning-center.esggo.co
+// Cloudflare Worker - esggo-learning-center 靜態網站
+// 訪問 https://esggo-learning-center.esggo.co/
 
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request))
 })
 
 async function handleRequest(request) {
-  const url = new URL(request.url)
-  
-  // 允許所有路徑存取
-  const pathname = url.pathname
-  
-  // 使用 GitHub 原始檔作為內容來源
-  if (pathname === '/' || pathname === '/index.html') {
-    return serveHtml()
-  }
-  
-  // 其他路徑都轉到 index.html ( SPA 支援 )
   return serveHtml()
 }
 
 async function serveHtml() {
-  // 直接返回 HTML 內容
   const html = `<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESGGO 學習中心 - OA-Team 30 蜂群聖典</title>
+  <title>ESGGO 學習中心</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -70,27 +58,6 @@ async function serveHtml() {
       gap: 0.5rem;
     }
     .card h2::before { content: '◆'; }
-    .chapter {
-      background: rgba(30, 40, 60, 0.7);
-      border-radius: 8px;
-      padding: 1.2rem;
-      margin: 1rem 0;
-      border-left: 4px solid #c9a24b;
-    }
-    .chapter h3 { color: #c9a24b; margin-bottom: 0.8rem; }
-    .chapter p { color: #d4c8a6; line-height: 1.6; }
-    .chapter ul { margin-left: 1.5rem; margin-top: 0.5rem; }
-    .chapter li { margin: 0.3rem 0; color: #b8a58e; }
-    .tag {
-      display: inline-block;
-      padding: 0.2rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      margin-right: 0.5rem;
-    }
-    .tag-primary { background: rgba(201, 162, 75, 0.2); color: #c9a24b; }
-    .tag-tech { background: rgba(138, 154, 141, 0.2); color: #8a9a8d; }
     .five-t-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -105,6 +72,10 @@ async function serveHtml() {
     }
     .five-t-item h4 { color: #c9a24b; font-size: 0.9rem; margin-bottom: 0.5rem; }
     .five-t-item p { font-size: 0.8rem; color: #b8a58e; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid rgba(201, 162, 75, 0.1); }
+    th { background: rgba(201, 162, 75, 0.1); color: #c9a24b; }
+    td { color: #d4c8a6; }
     footer {
       text-align: center;
       padding: 2rem 0;
@@ -133,50 +104,52 @@ async function serveHtml() {
     <header>
       <div class="logo">ESGGO</div>
       <h1>OA-Team 30 蜂群聖典</h1>
-      <p class="subtitle">5T 治理 • 30 矩陝 • AI Station 生產線 • 電子報發送 • 進化路線圖</p>
+      <p class="subtitle">5T 治理 • 30 矩陝 • AI Station 生產線</p>
     </header>
+
     <main>
       <div class="card">
         <h2>5T 治理框架</h2>
         <div class="five-t-grid">
-          <div class="five-t-item">
-            <h4>Traceable</h4>
-            <p>來源代碼可查</p>
-          </div>
-          <div class="five-t-item">
-            <h4>Trackable</h4>
-            <p>生命週期可追</p>
-          </div>
-          <div class="five-t-item">
-            <h4>Tangible</h4>
-            <p>UI/UX 可感</p>
-          </div>
-          <div class="five-t-item">
-            <h4>Transparent</h4>
-            <p>演算法可見</p>
-          </div>
-          <div class="five-t-item">
-            <h4>Trustworthy</h4>
-            <p>數據不可改</p>
-          </div>
+          <div class="five-t-item"><h4>Traceable</h4><p>來源代碼可查</p></div>
+          <div class="five-t-item"><h4>Trackable</h4><p>生命週期可追</p></div>
+          <div class="five-t-item"><h4>Tangible</h4><p>UI/UX 可感</p></div>
+          <div class="five-t-item"><h4>Transparent</h4><p>演算法可見</p></div>
+          <div class="five-t-item"><h4>Trustworthy</h4><p>數據不可改</p></div>
         </div>
       </div>
-      
+
       <div class="card">
-        <h2>30 人蜂群矩陣</h2>
-        <p>策略組 (1-6) • 技術組 (7-12) • 創意組 (13-18) • 營銷組 (19-24) • 守衛組 (25-30)</p>
+        <h2>30 矩陝</h2>
+        <table>
+          <thead><tr><th>編號</th><th>組別</th><th>人數</th></tr></thead>
+          <tbody>
+            <tr><td>1-6</td><td>策略組</td><td>6 人</td></tr>
+            <tr><td>7-12</td><td>技術組</td><td>6 人</td></tr>
+            <tr><td>13-18</td><td>創意組</td><td>6 人</td></tr>
+            <tr><td>19-24</td><td>營銷組</td><td>6 人</td></tr>
+            <tr><td>25-30</td><td>守衛組</td><td>6 人</td></tr>
+          </tbody>
+        </table>
       </div>
-      
+
       <div class="card">
         <h2>AI Station 七模組生產線</h2>
-        <p>編排中心、文字解析、語音合成、視覺生成、渲染引擎、雲端儲存、溯源庫</p>
-      </div>
-      
-      <div class="card">
-        <h2>電子報發送整合</h2>
-        <p>Email/Telegram/Slack/n8n/Webhook 6 種週報</p>
+        <table>
+          <thead><tr><th>#</th><th>模組</th><th>功能</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>編排中心</td><td>FastAPI + 背景執行緒池</td></tr>
+            <tr><td>2</td><td>文字解析</td><td>句法解析 + DNA 標記</td></tr>
+            <tr><td>3</td><td>語音合成</td><td>edge-tts / ElevenLabs</td></tr>
+            <tr><td>4</td><td>視覺生成</td><td>Pillow 品牌漸層</td></tr>
+            <tr><td>5</td><td>渲染引擎</td><td>ffmpeg + 同步字幕</td></tr>
+            <tr><td>6</td><td>雲端儲存</td><td>本地 /storage / S3</td></tr>
+            <tr><td>7</td><td>溯源庫</td><td>SQLite 作業庫</td></tr>
+          </tbody>
+        </table>
       </div>
     </main>
+
     <footer>
       <p>© 2026 ESGGO 學習中心 | 深藍#10243f + 暖金#c9a24b | 5T 治理</p>
     </footer>
