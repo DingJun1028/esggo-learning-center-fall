@@ -1,6 +1,4 @@
 // Cloudflare Worker - esggo-learning-center 靜態網站
-// 訪問 https://esggo-learning-center.esggo.co/
-
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request))
 })
@@ -18,95 +16,30 @@ async function serveHtml() {
   <title>ESGGO 學習中心</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
-      background: linear-gradient(135deg, #10243f 0%, #0a1626 100%);
-      color: #e8e0d8;
-      line-height: 1.7;
-      min-height: 100vh;
-    }
+    body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #10243f 0%, #0a1626 100%); color: #e8e0d8; line-height: 1.7; min-height: 100vh; }
     .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-    header {
-      text-align: center;
-      padding: 2rem 0;
-      border-bottom: 1px solid rgba(201, 162, 75, 0.2);
-      margin-bottom: 2rem;
-    }
-    h1 {
-      font-size: 2.5rem;
-      background: linear-gradient(90deg, #c9a24b, #eba37c);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .subtitle { color: #8a9a8d; font-size: 1.1rem; }
-    .card {
-      background: rgba(16, 36, 63, 0.6);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(201, 162, 75, 0.1);
-      transition: transform 0.2s;
-    }
-    .card:hover { transform: translateY(-2px); }
-    .card h2 {
-      color: #c9a24b;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+    header { text-align: center; padding: 2rem 0; border-bottom: 1px solid rgba(201,162,75,0.2); margin-bottom: 2rem; }
+    .logo { width: 60px; height: 60px; background: linear-gradient(135deg, #10243f, #c9a24b); border-radius: 12px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; color: #fff; }
+    .card { background: rgba(16,36,63,0.6); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(201,162,75,0.1); }
+    .card h2 { color: #c9a24b; font-size: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
     .card h2::before { content: '◆'; }
-    .five-t-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .five-t-item {
-      background: rgba(16, 36, 63, 0.5);
-      padding: 1rem;
-      border-radius: 8px;
-      text-align: center;
-    }
+    .five-t-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin-top: 1rem; }
+    .five-t-item { background: rgba(16,36,63,0.5); padding: 1rem; border-radius: 8px; text-align: center; }
     .five-t-item h4 { color: #c9a24b; font-size: 0.9rem; margin-bottom: 0.5rem; }
     .five-t-item p { font-size: 0.8rem; color: #b8a58e; }
     table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-    th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid rgba(201, 162, 75, 0.1); }
-    th { background: rgba(201, 162, 75, 0.1); color: #c9a24b; }
+    th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid rgba(201,162,75,0.1); }
+    th { background: rgba(201,162,75,0.1); color: #c9a24b; }
     td { color: #d4c8a6; }
-    footer {
-      text-align: center;
-      padding: 2rem 0;
-      margin-top: 2rem;
-      border-top: 1px solid rgba(201, 162, 75, 0.2);
-      color: #6b7b5e;
-      font-size: 0.9rem;
-    }
-    .logo {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #10243f, #c9a24b);
-      border-radius: 12px;
-      margin: 0 auto 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #fff;
-    }
+    footer { text-align: center; padding: 2rem 0; margin-top: 2rem; border-top: 1px solid rgba(201,162,75,0.2); color: #6b7b5e; font-size: 0.9rem; }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <div class="logo">ESGGO</div>
-      <h1>OA-Team 30 蜂群聖典</h1>
-      <p class="subtitle">5T 治理 • 30 矩陝 • AI Station 生產線</p>
+      <h2>5T 治理框架 • 30 矩陣 • AI Station 七模組生產線</h2>
     </header>
-
     <main>
       <div class="card">
         <h2>5T 治理框架</h2>
@@ -118,9 +51,8 @@ async function serveHtml() {
           <div class="five-t-item"><h4>Trustworthy</h4><p>數據不可改</p></div>
         </div>
       </div>
-
       <div class="card">
-        <h2>30 矩陝</h2>
+        <h2>30 矩陣</h2>
         <table>
           <thead><tr><th>編號</th><th>組別</th><th>人數</th></tr></thead>
           <tbody>
@@ -132,7 +64,6 @@ async function serveHtml() {
           </tbody>
         </table>
       </div>
-
       <div class="card">
         <h2>AI Station 七模組生產線</h2>
         <table>
@@ -149,18 +80,11 @@ async function serveHtml() {
         </table>
       </div>
     </main>
-
     <footer>
       <p>© 2026 ESGGO 學習中心 | 深藍#10243f + 暖金#c9a24b | 5T 治理</p>
     </footer>
   </div>
 </body>
 </html>`
-  
-  return new Response(html, {
-    headers: { 
-      'Content-Type': 'text/html; charset=utf-8',
-      'Cache-Control': 'public, max-age=300, s-maxage=300'
-    }
-  })
+  return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' } })
 }

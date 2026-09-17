@@ -20,14 +20,19 @@
       border-bottom: 1px solid rgba(201, 162, 75, 0.2);
       margin-bottom: 2rem;
     }
-    h1 {
-      font-size: 2.5rem;
-      background: linear-gradient(90deg, #c9a24b, #eba37c);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .logo {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #10243f, #c9a24b);
+      border-radius: 12px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
     }
-    .subtitle { color: #8a9a8d; font-size: 1.1rem; }
     .card {
       background: rgba(16, 36, 63, 0.6);
       border-radius: 12px;
@@ -72,27 +77,13 @@
       color: #6b7b5e;
       font-size: 0.9rem;
     }
-    .logo {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #10243f, #c9a24b);
-      border-radius: 12px;
-      margin: 0 auto 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #fff;
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <div class="logo">ESGGO</div>
-      <h1>OA-Team 30 蜂群聖典</h1>
-      <p class="subtitle">5T 治理 • 30 矩陣 • AI Station 生產線</p>
+      <h2>5T 治理框架 • 30 矩陣 • AI Station 七模組生產線</h2>
     </header>
 
     <main>
@@ -157,7 +148,7 @@
           </thead>
           <tbody>
             <tr><td>1</td><td>編排中心</td><td>FastAPI + 背景執行緒池</td></tr>
-            <tr><td>2</td><td>文字解析</td><td>內建句法解析 + DNA 標記</td></tr>
+            <tr><td>2</td><td>文字解析</td><td>句法解析 + DNA 標記</td></tr>
             <tr><td>3</td><td>語音合成</td><td>edge-tts / ElevenLabs</td></tr>
             <tr><td>4</td><td>視覺生成</td><td>Pillow 品牌漸層</td></tr>
             <tr><td>5</td><td>渲染引擎</td><td>ffmpeg + 同步字幕</td></tr>
