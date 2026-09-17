@@ -1,4 +1,4 @@
-// Cloudflare Worker - esggo-learning-center 靜態網站
+// Cloudflare Worker - ESGGO 2026 Berkeley 學習中心
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request))
 })
@@ -16,75 +16,55 @@ async function serveHtml() {
   <title>ESGGO 學習中心</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #10243f 0%, #0a1626 100%); color: #e8e0d8; line-height: 1.7; min-height: 100vh; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-    header { text-align: center; padding: 2rem 0; border-bottom: 1px solid rgba(201,162,75,0.2); margin-bottom: 2rem; }
-    .logo { width: 60px; height: 60px; background: linear-gradient(135deg, #10243f, #c9a24b); border-radius: 12px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; color: #fff; }
-    .card { background: rgba(16,36,63,0.6); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(201,162,75,0.1); }
-    .card h2 { color: #c9a24b; font-size: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-    .card h2::before { content: '◆'; }
-    .five-t-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin-top: 1rem; }
-    .five-t-item { background: rgba(16,36,63,0.5); padding: 1rem; border-radius: 8px; text-align: center; }
-    .five-t-item h4 { color: #c9a24b; font-size: 0.9rem; margin-bottom: 0.5rem; }
-    .five-t-item p { font-size: 0.8rem; color: #b8a58e; }
-    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-    th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid rgba(201,162,75,0.1); }
-    th { background: rgba(201,162,75,0.1); color: #c9a24b; }
-    td { color: #d4c8a6; }
-    footer { text-align: center; padding: 2rem 0; margin-top: 2rem; border-top: 1px solid rgba(201,162,75,0.2); color: #6b7b5e; font-size: 0.9rem; }
+    body { font-family: system-ui, sans-serif; background: #f5f5f5; color: #333; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #fff; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .logo { font-size: 1.5rem; font-weight: bold; color: #10243f; }
+    .header-actions { display: flex; gap: 15px; align-items: center; }
+    .lang-btn { padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; background: #fff; cursor: pointer; }
+    .login-btn { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: #10243f; color: #fff; border: none; border-radius: 20px; cursor: pointer; }
+    .status-badge { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 12px; font-size: 0.85rem; }
+    .hero { background: linear-gradient(135deg, #10243f 0%, #0a1626 100%); color: #fff; padding: 40px 30px; border-radius: 12px; margin-bottom: 30px; position: relative; text-align: center; }
+    .hero h1 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 10px; }
+    .hero .serif { font-family: Georgia, serif; font-size: 2rem; opacity: 0.9; margin-bottom: 5px; }
+    .core-card { background: #10243f; border-radius: 12px; padding: 40px 30px; margin-bottom: 30px; border-left: 5px solid #c9a24b; color: #fff; text-align: center; }
+    .core-card h1 { font-family: Georgia, serif; font-size: 2.5rem; margin-bottom: 10px; }
+    .core-card .subtitle { font-weight: bold; font-size: 1.8rem; color: #e8e0d8; }
+    .action-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
+    .action-card { background: #fff; border-radius: 12px; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.2s; }
+    .action-card:hover { transform: translateY(-3px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .action-card.active { border: 2px solid #10243f; }
+    .icon { width: 60px; height: 60px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #f0f0f0; font-size: 2rem; }
+    .action-card .label { font-weight: 500; color: #333; }
+    .footer { text-align: center; padding: 20px; color: #888; font-size: 0.9rem; }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
+    <header class="header">
       <div class="logo">ESGGO</div>
-      <h2>5T 治理框架 • 30 矩陣 • AI Station 七模組生產線</h2>
+      <div class="header-actions">
+        <button class="lang-btn">繁體中文 ▼</button>
+        <button class="login-btn">📧 使用 Google 登入</button>
+      </div>
     </header>
-    <main>
-      <div class="card">
-        <h2>5T 治理框架</h2>
-        <div class="five-t-grid">
-          <div class="five-t-item"><h4>Traceable</h4><p>來源代碼可查</p></div>
-          <div class="five-t-item"><h4>Trackable</h4><p>生命週期可追</p></div>
-          <div class="five-t-item"><h4>Tangible</h4><p>UI/UX 可感</p></div>
-          <div class="five-t-item"><h4>Transparent</h4><p>演算法可見</p></div>
-          <div class="five-t-item"><h4>Trustworthy</h4><p>數據不可改</p></div>
-        </div>
-      </div>
-      <div class="card">
-        <h2>30 矩陣</h2>
-        <table>
-          <thead><tr><th>編號</th><th>組別</th><th>人數</th></tr></thead>
-          <tbody>
-            <tr><td>1-6</td><td>策略組</td><td>6 人</td></tr>
-            <tr><td>7-12</td><td>技術組</td><td>6 人</td></tr>
-            <tr><td>13-18</td><td>創意組</td><td>6 人</td></tr>
-            <tr><td>19-24</td><td>營銷組</td><td>6 人</td></tr>
-            <tr><td>25-30</td><td>守衛組</td><td>6 人</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="card">
-        <h2>AI Station 七模組生產線</h2>
-        <table>
-          <thead><tr><th>#</th><th>模組</th><th>功能</th></tr></thead>
-          <tbody>
-            <tr><td>1</td><td>編排中心</td><td>FastAPI + 背景執行緒池</td></tr>
-            <tr><td>2</td><td>文字解析</td><td>句法解析 + DNA 標記</td></tr>
-            <tr><td>3</td><td>語音合成</td><td>edge-tts / ElevenLabs</td></tr>
-            <tr><td>4</td><td>視覺生成</td><td>Pillow 品牌漸層</td></tr>
-            <tr><td>5</td><td>渲染引擎</td><td>ffmpeg + 同步字幕</td></tr>
-            <tr><td>6</td><td>雲端儲存</td><td>本地 /storage / S3</td></tr>
-            <tr><td>7</td><td>溯源庫</td><td>SQLite 作業庫</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
-    <footer>
-      <p>© 2026 ESGGO 學習中心 | 深藍#10243f + 暖金#c9a24b | 5T 治理</p>
-    </footer>
+    <div class="status-badge">Firestore 已連線</div>
+    <section class="hero">
+      <h1><span class="serif">2026 Berkeley</span><br>柏克萊國際永續策略人才培育課程學習中心</h1>
+    </section>
+    <section class="core-card">
+      <h1>2026 Berkeley</h1>
+      <p class="subtitle">柏克萊國際永續策略人才培育課程學習中心</p>
+    </section>
+    <section class="action-grid">
+      <div class="action-card active"><div class="icon">📚</div><div class="label">學員資源區</div></div>
+      <div class="action-card"><div class="icon">⬆️</div><div class="label">作業上傳</div></div>
+      <div class="action-card"><div class="icon">▶️</div><div class="label">課程回放</div></div>
+      <div class="action-card"><div class="icon">😊</div><div class="label">滿意調查</div></div>
+    </section>
+    <footer class="footer">2026 Berkeley柏克萊國際永續策略人才培育課程學習中心 | 柏克萊國際策略與創新 ESG 人才培育課程</footer>
   </div>
 </body>
 </html>`
-  return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' } })
+  return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
 }
